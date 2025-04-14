@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
+import { Result } from "postcss";
 
 const Login = () => {
+  const {signInusr} = useContext(AuthContext);
+  const loginHandler = e =>{
+    e.preventDefault();
+    const email =e.target.email.value;
+    const password =e.target.password.value;
+
+    // signIn 
+    signInusr(email,password)
+    .then(result=>{
+      console.log(result.user)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+
+  }
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col">
         <h1 className="text-3xl font-bold">Log in now!</h1>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <form>
+            <form onSubmit={loginHandler}>
               <fieldset className="fieldset">
                 <label className="fieldset-label">Email</label>
-                <input type="email" className="input" placeholder="Email" />
+                <input name="email" type="email" className="input" placeholder="Email" />
                 <label className="fieldset-label">Password</label>
                 <input
+                  name="password"
                   type="password"
                   className="input"
                   placeholder="Password"
