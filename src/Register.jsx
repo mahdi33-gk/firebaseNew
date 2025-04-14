@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+    const formHandler = e =>{
+        e.preventDeafult();
+        const email = e.taget.name.value;
+        const password = e.taget.password.value;
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col">
@@ -11,9 +16,10 @@ const Register = () => {
             <form>
               <fieldset className="fieldset">
                 <label className="fieldset-label">Email</label>
-                <input type="email" className="input" placeholder="Email" />
+                <input name='email' type="email" className="input" placeholder="Email" />
                 <label className="fieldset-label">Password</label>
                 <input
+                 name='password'
                   type="password"
                   className="input"
                   placeholder="Password"
