@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './AuthProvider';
 
 const Register = () => {
+    const {creatUser} = useContext(AuthContext);
     const formHandler = e =>{
-        e.preventDeafult();
-        const email = e.taget.name.value;
-        const password = e.taget.password.value;
+        e.preventDefault();
+        const emaill = e.target.email.value;
+        const password = e.target.password.value;
+        const name = e.target.name.value;
+        
+        creatUser(emaill,password)
+        .then(result =>{
+          console.log(result.user)
+        })
+        .catch(error=>{
+          console.log('found error!')
+        })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -15,6 +26,8 @@ const Register = () => {
           <div className="card-body">
             <form onSubmit={formHandler}>
               <fieldset className="fieldset">
+                <label className="fieldset-label">Name</label>
+                <input name='name' type="text" className="input" placeholder="Name" />
                 <label className="fieldset-label">Email</label>
                 <input name='email' type="email" className="input" placeholder="Email" />
                 <label className="fieldset-label">Password</label>
