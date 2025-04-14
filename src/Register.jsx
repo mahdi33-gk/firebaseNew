@@ -13,7 +13,7 @@ const Register = () => {
         <h1 className="text-3xl font-bold">Register now!</h1>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <form>
+            <form onSubmit={formHandler}>
               <fieldset className="fieldset">
                 <label className="fieldset-label">Email</label>
                 <input name='email' type="email" className="input" placeholder="Email" />
