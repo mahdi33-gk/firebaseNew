@@ -1,35 +1,40 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import './index.css'
+import "./index.css";
 import { AuthContext } from "./AuthProvider";
 
 const Navbar = () => {
+  const { signOuTuser, user } = useContext(AuthContext);
   const links = (
     <>
       <li>
-        <NavLink to={'/'}>Home</NavLink>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={'/login'}>Login</NavLink>
+        <NavLink to={"/login"}>Login</NavLink>
       </li>
       <li>
-        <NavLink to={'/register'}>Register</NavLink>
+        <NavLink to={"/register"}>Register</NavLink>
       </li>
-      <li>
-        <NavLink to={'/order'}>Order</NavLink>
-      </li>
-      
+      {user &&
+        <>
+          <li>
+            <NavLink to={"/order"}>Order</NavLink>
+          </li>
+        </>
+      }
     </>
   );
-  const {signOuTuser,user} = useContext(AuthContext)
+ 
   const signoutHandler = () => {
-    signOuTuser().then(()=>{
-       console.log('ok')
-     })
-     .catch(()=>{
-       console.log('error')
-     })
-  }
+    signOuTuser()
+      .then(() => {
+        console.log("ok");
+      })
+      .catch(() => {
+        console.log("error");
+      });
+  };
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -61,17 +66,19 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl">firebaseNew</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {
-          user? <>
-          <a className="btn">{user?.email}</a>
-          <a onClick={signoutHandler} className="btn">Sign Out</a>
-          </>: <Link to={'/login'}>Log in</Link>
-        }
+        {user ? (
+          <>
+            <a className="btn">{user?.email}</a>
+            <a onClick={signoutHandler} className="btn">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to={"/login"}>Log in</Link>
+        )}
       </div>
     </div>
   );
