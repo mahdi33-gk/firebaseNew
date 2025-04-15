@@ -10,6 +10,7 @@ import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import AuthProvider from "./AuthProvider.jsx";
 import Order from "./Order.jsx";
+import Private from "./privateRoutes/Private.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'order',
-        element: <Order></Order>
+        element: <Private> <Order></Order> </Private>
       }
     ],
   },
