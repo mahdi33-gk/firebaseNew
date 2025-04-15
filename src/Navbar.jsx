@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './index.css'
 import { AuthContext } from "./AuthProvider";
 
@@ -18,8 +18,15 @@ const Navbar = () => {
       
     </>
   );
-  const {user} = useContext(AuthContext)
-
+  const {signOuTuser,user} = useContext(AuthContext)
+  const signoutHandler = () => {
+    signOuTuser().then(()=>{
+       console.log('ok')
+     })
+     .catch(()=>{
+       console.log('error')
+     })
+  }
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -56,7 +63,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">{user.email}</a>
+        {
+          user? <>
+          <a className="btn">{user?.email}</a>
+          <a onClick={signoutHandler} className="btn">Sign Out</a>
+          </>: <Link to={'/login'}>Log in</Link>
+        }
       </div>
     </div>
   );
