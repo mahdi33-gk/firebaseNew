@@ -4,7 +4,7 @@ import { AuthContext } from "./AuthProvider";
 import { Result } from "postcss";
 
 const Login = () => {
-  const {signInusr} = useContext(AuthContext);
+  const {signInusr,signInWithGoogleHandler} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const loginHandler = e =>{
@@ -22,17 +22,17 @@ const Login = () => {
     .catch(error=>{
       console.log(error)
     })
-    const googleSignIn = ()=>{
-      signInWithGoogleHandler()
-      .then(result=>{
-        console.log(result.user)
-      })
-      .error(err=>{
-        console.log('found error');
-        
-      })
-    }
-
+  }
+  const googleSignIn = ()=>{
+    signInWithGoogleHandler()
+    .then(result=>{
+      console.log(result.user)
+      navigate('/home')
+    })
+    .error(err=>{
+      console.log('found error');
+      
+    })
   }
   return (
     <div className="hero bg-base-200 min-h-screen">
