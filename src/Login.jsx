@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { Result } from "postcss";
 
 const Login = () => {
   const {signInusr} = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const loginHandler = e =>{
     e.preventDefault();
     const email =e.target.email.value;
@@ -15,7 +17,7 @@ const Login = () => {
     .then(result=>{
       console.log(result.user)
       e.target.reset();
-      Navigate('/home')
+      navigate('/home')
     })
     .catch(error=>{
       console.log(error)
