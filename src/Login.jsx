@@ -22,6 +22,16 @@ const Login = () => {
     .catch(error=>{
       console.log(error)
     })
+    const googleSignIn = ()=>{
+      signInWithGoogleHandler()
+      .then(result=>{
+        console.log(result.user)
+      })
+      .error(err=>{
+        console.log('found error');
+        
+      })
+    }
 
   }
   return (
@@ -45,7 +55,7 @@ const Login = () => {
                   <a className="link link-hover">Forgot password?</a>
                 </div>
                 <button className="btn btn-neutral mt-4">Login</button>
-                <button className="btn btn-neutral mt-4">Login with Google</button>
+                <button onClick={googleSignIn} className="btn btn-neutral mt-4">Login with Google</button>
               </fieldset>
               <h3 className="mt-3">New to this? <Link to={'/register'} className="ml-2 underline">Register now!</Link></h3>
             </form>
